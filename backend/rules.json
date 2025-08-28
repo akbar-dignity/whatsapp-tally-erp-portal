@@ -1,0 +1,18 @@
+{
+  "welcome": {
+    "text": "Hello 👋 welcome to Dignity Engineering Shop! How can I help you today?",
+    "buttons": [
+      { "id": "check_balance", "title": "💳 Check Balance" },
+      { "id": "create_quote", "title": "📝 Create Quotation" },
+      { "id": "track_order", "title": "📦 Track Order" }
+    ]
+  },
+  "fallback": {
+    "text": "Sorry, I didn't understand that. Please choose an option or type 'menu'.",
+    "buttons": [
+      { "id": "check_balance", "title": "💳 Check Balance" },
+      { "id": "create_quote", "title": "📝 Create Quotation" },
+      { "id": "track_order", "title": "📦 Track Order" }
+    ]
+  }
+}
