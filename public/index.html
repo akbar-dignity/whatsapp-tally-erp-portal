@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dignity ERP Portal</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>📊 Dignity ERP Portal</h1>
+  <div class="container">
+    <section>
+      <h2>Conversation Logs</h2>
+      <button onclick="fetchLogs()">📜 Refresh Logs</button>
+      <pre id="logs"></pre>
+    </section>
+    <section>
+      <h2>Chatbot Rules</h2>
+      <textarea id="rulesArea" rows="15" cols="80"></textarea><br>
+      <button onclick="updateRules()">💾 Save Rules</button>
+      <span id="status"></span>
+    </section>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
