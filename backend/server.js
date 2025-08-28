@@ -1,8 +1,9 @@
 import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
-import { handleIncomingMessage, sendMessage } from "./whatsapp.js";
-import { getOutstanding, verifyLedger } from "./tally.js";
+import { handleIncomingMessage } from "./whatsapp.js";
+import fs from "fs";
+import path from "path";
 
 const app = express();
 app.use(bodyParser.json());
@@ -10,11 +11,11 @@ app.use(cors());
 app.use(express.static("public"));
 
 const PORT = process.env.PORT || 3000;
-const VERIFY_TOKEN = "Dignity@4321";   // WhatsApp webhook verify
+const VERIFY_TOKEN = process.env.VERIFY_TOKEN || "Dignity@4321";
 const WHATSAPP_TOKEN = process.env.WHATSAPP_TOKEN;
 const PHONE_NUMBER_ID = process.env.PHONE_NUMBER_ID;
 
-// ✅ Webhook verification
+// Webhook verification
 app.get("/", (req, res) => {
   const mode = req.query["hub.mode"];
   const token = req.query["hub.verify_token"];
@@ -26,7 +27,7 @@ app.get("/", (req, res) => {
   res.sendStatus(403);
 });
 
-// ✅ Handle WhatsApp messages
+// WhatsApp webhook handler
 app.post("/", async (req, res) => {
   try {
     const body = req.body;
@@ -43,6 +44,14 @@ app.post("/", async (req, res) => {
     console.error("❌ Error:", err.message);
     res.sendStatus(500);
   }
+});
+
+// Admin GUI: conversation logs
+let conversations = {};
+app.get("/conversations", (req, res) => res.json(conversations));
+app.post("/update-rules", (req, res) => {
+  fs.writeFileSync(path.join(process.cwd(), "backend/rules.json"), JSON.stringify(req.body, null, 2));
+  res.json({ success: true, message: "Rules updated successfully" });
 });
 
 app.listen(PORT, () => console.log(`✅ ERP Portal running at http://localhost:${PORT}`));
