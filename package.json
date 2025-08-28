@@ -1,0 +1,16 @@
+{
+  "name": "whatsapp-tally-erp-portal",
+  "version": "1.0.0",
+  "description": "WhatsApp self-service ERP portal for Dignity Engineering",
+  "main": "backend/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node backend/server.js"
+  },
+  "dependencies": {
+    "axios": "^1.6.0",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "express": "^4.18.2"
+  }
+}
