@@ -16,13 +16,11 @@ async function updateRules() {
     document.getElementById('status').textContent = data.message;
   } catch (err) {
     document.getElementById('status').textContent = '❌ Error saving rules';
-    console.error(err);
   }
 }
 
-// Load rules.json initially
 async function loadRules() {
-  const res = await fetch('/rules.json');
+  const res = await fetch('/backend/rules.json');
   const data = await res.json();
   document.getElementById('rulesArea').value = JSON.stringify(data, null, 2);
 }
